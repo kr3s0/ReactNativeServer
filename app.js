@@ -168,7 +168,7 @@ app.post('/', function(req, res, next) {
 		    collection.find(query).toArray(function(err, result) {
 			    if (err) throw err;
 			    
-			   if(result.admin){
+			   if(result[0].admin){
 			   	res.send({
 					success: true
 				});
