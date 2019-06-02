@@ -24,7 +24,7 @@ app.get('/', function (req, res,next) {
 	  } 
 	  else {
 	    console.log('connected')
-	    const collection = client.db("chat").collection("users").find({}).toArray(function(err, result) {
+	    const collection = client.db("reactnativeserver").collection("users").find({}).toArray(function(err, result) {
 		    if (err) throw err;
 		    users = result;
 		  });
@@ -50,7 +50,7 @@ app.get('/chat', function(req,res,next){
 	  } 
 	  else {
 	    console.log('connected')
-	    const collection = client.db("chat").collection("messages").find({}).toArray(function(err, result) {
+	    const collection = client.db("reactnativeserver").collection("messages").find({}).toArray(function(err, result) {
 		    if (err) throw err;
 		    conversations = result;
 		  });
@@ -84,7 +84,7 @@ app.post('/', function(req, res, next) {
 		    
 		    var query = { "user": user, "pass" : pass };
 		    console.log(query)
-		    const collection = client.db("chat").collection("users");
+		    const collection = client.db("reactnativeserver").collection("users");
 		    collection.find(query).toArray(function(err, result) {
 			    if (err) throw err;
 			    
@@ -125,7 +125,7 @@ app.post('/', function(req, res, next) {
 		  } 
 		  else {
 
-		  	const collection = client.db("chat").collection("users");
+		  	const collection = client.db("reactnativeserver").collection("users");
 
 		  	var query = { "user": req.body.username, "pass" : req.body.password };
 		  	var newvalues = { $set: {longitude: req.body.longitude, latitude: req.body.latitude } };
@@ -174,7 +174,7 @@ instance.connect((err, client) => {
   } 
   else {
     console.log('connected')
-    const collection = client.db("chat").collection("messages")
+    const collection = client.db("reactnativeserver").collection("messages")
     collection.insertOne(newMessage);
     client.close()
     
