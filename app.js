@@ -151,6 +151,47 @@ app.post('/', function(req, res, next) {
 });
 		
 
+	}else if(req.body.isadmin){
+		
+		
+		const instance = new MongoClient(uri, { useNewUrlParser: true });
+		instance.connect((err, client) => {
+		  if (err){
+		  	console.log('failed to connect')
+		  	console.log(err)
+		  } 
+		  else {
+		    
+		    var query = { "user": req.body.username};
+		    
+		    const collection = client.db("reactnativeserver").collection("users");
+		    collection.find(query).toArray(function(err, result) {
+			    if (err) throw err;
+			    
+			   if(result.admin){
+			   	res.send({
+					success: true
+				});
+			   }else{
+				   res.send({
+					success: false
+				});
+			   
+			   }
+			    
+			  });
+		    
+
+		   
+	
+
+		    
+		    client.close()
+		    
+		    
+		  }
+		 });
+		
 	}
 
 });
